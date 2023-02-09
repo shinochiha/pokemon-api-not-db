@@ -176,10 +176,6 @@ func CatchPokemonById(pokemonID int) (MyPokemon, error) {
 	return myPokemon, nil
 }
 
-// func GetMyPokemon() []MyPokemon {
-// 	return myPokemons
-// }
-
 func GetMyPokemon() (int, []MyPokemon) {
 	return len(myPokemons), myPokemons
 }
