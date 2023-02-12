@@ -1,6 +1,8 @@
 # Pokemon REST API
 REST API ini adalah implementasi dari API Pokemon tanpa menggunakan database. REST API ini dibuat menggunakan bahasa Go dan menggunakan library `net/http` dan `github.com/gorilla/mux` untuk manajemen routing.
 
+Pada contoh REST API Pokemon ini, informasi Pokemon disimpan sebagai variabel slice dalam struct. Slice ini berfungsi sebagai mock database, yaitu sebagai pengganti database yang sesungguhnya. Oleh karena itu, informasi Pokemon disimpan secara lokal dalam memori aplikasi dan tidak perlu terhubung ke database eksternal.
+
 ## Instalasi
 Untuk menggunakan REST API ini, pertama-tama Anda harus memastikan bahwa Anda sudah menginstal Go pada komputer Anda.
 
@@ -30,11 +32,18 @@ $  ./pokemon-api
 Setelah REST API ini berjalan, Anda dapat mengaksesnya melalui browser atau aplikasi lain seperti Postman. Berikut adalah daftar endpoint yang tersedia:
 
 #### 1. Get Pokemon
-Mendapatkan daftar Pokemon.
+Mendapatkan daftar Pokemon. (data default nya 20)
 ```bash
-URL: http://localhost:8000/pokemon
+URL: http://localhost:8000/pokemon 
 Method: GET
 ```
+Note :
+jika ingin lebih dari 20 maka tambahkan params ?limit_poke_api={jumlah yang di inginkan}
+```bash
+Contoh: http://localhost:8000/pokemon?limit_poke_api=1279
+```
+
+
 #### 2. Get Detail Pokemon
 Mendapatkan detail dari Pokemon tertentu.
 ```bash

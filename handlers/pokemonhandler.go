@@ -40,10 +40,16 @@ func GetPokemonListHandler(w http.ResponseWriter, r *http.Request) {
 	limitStr := r.URL.Query().Get("limit")
 	limit, err := strconv.Atoi(limitStr)
 	if err != nil {
-		limit = 20
+		limit = 10
 	}
 
-	pokemons, err := models.GetPokemonList()
+	limitPokeApiStr := r.URL.Query().Get("limit_poke_api")
+	limitPokeApi, err := strconv.Atoi(limitPokeApiStr)
+	if err != nil {
+		limitPokeApi = 20
+	}
+
+	pokemons, err := models.GetPokemonList(limitPokeApi)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

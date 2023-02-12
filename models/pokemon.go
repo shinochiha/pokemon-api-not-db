@@ -9,19 +9,14 @@ import (
 	"net/http"
 )
 
-type Pokemon struct {
-	ID       int     `json:"id"`
-	Name     string  `json:"name"`
-	Nickname string  `json:"nickname"`
-	Height   float32 `json:"height"`
-	Weight   float32 `json:"weight"`
-	Sprites  struct {
-		BackDefault  string `json:"back_default"`
-		FrontDefault string `json:"front_default"`
-	} `json:"sprites"`
+type PokemonList struct {
+	Count    int       `json:"count"`
+	Next     string    `json:"next"`
+	Previous string    `json:"previous"`
+	Results  []Pokemon `json:"results"`
 }
 
-type MyPokemon struct {
+type Pokemon struct {
 	ID       int     `json:"id"`
 	Name     string  `json:"name"`
 	Nickname string  `json:"nickname"`
@@ -52,22 +47,29 @@ type PokemonDetail struct {
 			Name string `json:"name"`
 		} `json:"move"`
 	} `json:"moves"`
+	Abilities []struct {
+		Ability struct {
+			Name string `json:"name"`
+		} `json:"ability"`
+	} `json:"abilities"`
 }
 
-var pokemonsDetail []PokemonDetail
-var pokemonURL PokemonDetail
+type MyPokemon struct {
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	Nickname string  `json:"nickname"`
+	Height   float32 `json:"height"`
+	Weight   float32 `json:"weight"`
+	Sprites  struct {
+		BackDefault  string `json:"back_default"`
+		FrontDefault string `json:"front_default"`
+	} `json:"sprites"`
+}
+
 var myPokemons []MyPokemon
 
-// PokemonList represents a list of pokemon
-type PokemonList struct {
-	Count    int       `json:"count"`
-	Next     string    `json:"next"`
-	Previous string    `json:"previous"`
-	Results  []Pokemon `json:"results"`
-}
-
-func GetPokemonList() (PokemonList, error) {
-	resp, err := http.Get("https://pokeapi.co/api/v2/pokemon?limit=100")
+func GetPokemonList(limitPokeApi int) (PokemonList, error) {
+	resp, err := http.Get(fmt.Sprintf("https://pokeapi.co/api/v2/pokemon?limit=%d", limitPokeApi))
 	if err != nil {
 		return PokemonList{}, err
 	}
@@ -98,21 +100,11 @@ func GetPokemonList() (PokemonList, error) {
 		if err != nil {
 			panic(err)
 		}
-		// var pokemonURL Pokemon
+		var pokemonURL Pokemon
 		err = json.Unmarshal(body, &pokemonURL)
 		if err != nil {
 			panic(err)
 		}
-
-		pokemonsDetail = append(pokemonsDetail, PokemonDetail{
-			Name:    result.Name,
-			ID:      i + 1,
-			Height:  pokemonURL.Height,
-			Weight:  pokemonURL.Weight,
-			Sprites: pokemonURL.Sprites,
-			Types:   pokemonURL.Types,
-			Moves:   pokemonURL.Moves,
-		})
 
 		pokemon := Pokemon{
 			Name:    result.Name,
@@ -140,7 +132,7 @@ func GetPokemonByID(id int) (PokemonDetail, error) {
 		return PokemonDetail{}, err
 	}
 
-	return PokemonDetail{ID: data.ID, Name: data.Name, Height: data.Height, Weight: data.Weight, Sprites: data.Sprites, Types: data.Types, Moves: data.Moves}, nil
+	return PokemonDetail{ID: data.ID, Name: data.Name, Height: data.Height, Weight: data.Weight, Sprites: data.Sprites, Types: data.Types, Moves: data.Moves, Abilities: data.Abilities}, nil
 }
 
 func CatchPokemonById(pokemonID int) (MyPokemon, error) {
