@@ -4,7 +4,9 @@ REST API ini adalah implementasi dari API Pokemon tanpa menggunakan database. RE
 Pada contoh REST API Pokemon ini, informasi Pokemon disimpan sebagai variabel slice dalam struct. Slice ini berfungsi sebagai mock database, yaitu sebagai pengganti database yang sesungguhnya. Oleh karena itu, informasi Pokemon disimpan secara lokal dalam memori aplikasi dan tidak perlu terhubung ke database eksternal.
 
 ## Instalasi
-Untuk menggunakan REST API ini, pertama-tama Anda harus memastikan bahwa Anda sudah menginstal Go pada komputer Anda.
+Untuk menggunakan REST API ini terdapat 2 cara, Running with Go atau Running with Docker 
+### Running with Go
+cara pertama Anda harus memastikan bahwa Anda sudah menginstal Go pada komputer Anda.
 
 1. Clone repository ini:
 ```bash
@@ -27,6 +29,16 @@ $ go build
 ```bash
 $  ./pokemon-api
 ```
+### Running with Docker
+Cara ke kedua Anda harus menginstal Docker terlebih dahulu di mesin Anda. Kemudian, Clone repository dan buat image Docker menggunakan perintah berikut di terminal:
+```bash
+$ docker build -t pokemon-api .
+```
+Setelah image berhasil di buat, jalankan perintah berikut untuk start container:
+```bash
+$ docker run -p 8080:8080 pokemon-api
+```
+
 
 ## Penggunaan
 Setelah REST API ini berjalan, Anda dapat mengaksesnya melalui browser atau aplikasi lain seperti Postman. Berikut adalah daftar endpoint yang tersedia:
