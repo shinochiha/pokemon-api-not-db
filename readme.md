@@ -36,7 +36,7 @@ $ docker build -t pokemon-api .
 ```
 Setelah image berhasil di buat, jalankan perintah berikut untuk start container:
 ```bash
-$ docker run -p 8080:8080 pokemon-api
+$ docker run -p 8080:8080 -i pokemon-api
 ```
 
 
