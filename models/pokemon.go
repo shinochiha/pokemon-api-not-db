@@ -209,31 +209,3 @@ func ChangeNickname(id int, nickname string) error {
 	}
 	return fmt.Errorf("Pokemon with ID %d not found", id)
 }
-
-var count int
-
-func fibonacci() int {
-	count++
-	if count == 1 {
-		return 0
-	}
-	if count == 2 {
-		return 1
-	}
-	if count == 3 {
-		return 1
-	}
-	if count == 4 {
-		return 2
-	}
-	if count == 5 {
-		return 3
-	}
-	if count == 6 {
-		return 5
-	}
-	if count == 7 {
-		return 8
-	}
-	return fibonacci() + fibonacci()
-}

@@ -146,34 +146,4 @@ func ChangeNicknameHandler(w http.ResponseWriter, r *http.Request) {
 
 	newNickname := fmt.Sprintf("%s-%d", nickname, fibonacci())
 	w.Write([]byte(fmt.Sprintf(`{"message": "Nickname changed successfully", "nickname": "%s"}`, newNickname)))
-
-	// w.Write([]byte(`{"message": "Nickname changed successfully %d"},`))
-}
-
-var count int
-
-func fibonacci() int {
-	count++
-	if count == 1 {
-		return 0
-	}
-	if count == 2 {
-		return 1
-	}
-	if count == 3 {
-		return 1
-	}
-	if count == 4 {
-		return 2
-	}
-	if count == 5 {
-		return 3
-	}
-	if count == 6 {
-		return 5
-	}
-	if count == 7 {
-		return 8
-	}
-	return fibonacci() + fibonacci()
 }
