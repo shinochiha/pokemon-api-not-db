@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the local code to the container
 COPY . .
 
+# managing modules installed in a project
+RUN go mod tidy
+
 # Build the Go application
 RUN go build -o main .
 
