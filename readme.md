@@ -96,7 +96,7 @@ Method: PUT
 Contoh: http://localhost:8080/mypokemon/1/poke-poke
 {
     "message": "Nickname changed successfully",
-    "nickname": "My-bulbasaur-0"
+    "nickname": "poke-poke-0"
 }
 
 nickname akan berubah menjadi ada -0 karena mengikuti fibonachi
